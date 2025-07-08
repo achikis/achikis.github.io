@@ -33,7 +33,7 @@
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #222;
-            background: linear-gradient(to top, #111111, #181818);
+            background: #111111;
         }
         .card-hover:hover {
             transform: translateY(-8px);
@@ -48,25 +48,14 @@
 <body class="antialiased">
 
     <!-- Contenedor del Fondo de Íconos -->
-    <div class="fixed inset-0 z-0 opacity-[0.04]">
+    <div class="fixed inset-0 z-0 opacity-[0.03]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern id="pattern-icons" patternUnits="userSpaceOnUse" width="300" height="300" class="text-white">
-                    <!-- GTA SA Logo -->
-                    <g transform="translate(50, 50)">
-                        <text x="0" y="30" class="font-gta text-[50px]" fill="currentColor" style="font-weight:700;">GTA:SA</text>
-                    </g>
-                    <!-- Mouse -->
-                     <g transform="translate(200, 150)">
-                        <rect x="0" y="0" width="30" height="45" rx="15" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <line x1="15" y1="0" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
-                    </g>
-                     <!-- Lentes -->
-                    <g transform="translate(25, 200) scale(1.2)">
-                        <circle cx="15" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <circle cx="45" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M25 15 H35" stroke="currentColor" stroke-width="2" fill="none"/>
-                    </g>
+                    <g transform="translate(50, 50)"><text x="0" y="30" class="font-gta text-[50px]" fill="currentColor" style="font-weight:700;">GTA:SA</text></g>
+                    <g transform="translate(200, 150)"><rect x="0" y="0" width="30" height="45" rx="15" stroke="currentColor" stroke-width="2" fill="none"/><line x1="15" y1="0" x2="15" y2="15" stroke="currentColor" stroke-width="2"/></g>
+                    <g transform="translate(25, 200) scale(1.2)"><circle cx="15" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="45" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M25 15 H35" stroke="currentColor" stroke-width="2" fill="none"/></g>
+                    <g transform="translate(150, 250)"><path d="M0 20 Q 20 0 40 20 L 20 20 Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 20 V15 M20 20 V10 M30 20 V15" stroke="currentColor" stroke-width="2" fill="none"/></g>
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#pattern-icons)"></rect>
@@ -89,47 +78,51 @@
             </a>
         </header>
 
-        <!-- Ficha Técnica -->
+        <!-- El Corazón del Canal -->
         <section class="my-16 md:my-24">
-            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Ficha Técnica</h2>
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">El Corazón del Canal</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Origen</h3><p class="text-gray-400 text-lg">México. La tierra de los tacos y las leyendas.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Juego Clásico</h3><p class="text-gray-400 text-lg">GTA: San Andreas. "Ah shit, here we go again."</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Habilidad</h3><p class="text-gray-400 text-lg">El Grito de Niña. Un sonido agudo que resuena en los momentos de pánico.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Humildad Ante Todo</h3><p class="text-gray-400">Eliud mantiene los pies en la tierra. Es una persona genuina que valora a su comunidad por encima de todo.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Protagonista</h3><p class="text-gray-400">Cada persona que llega recibe un saludo. Cada follow, un agradecimiento. Cada mensaje es leído. Aquí, tú importas.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3><p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo se celebra con la misma energía, usualmente con un baile preparado para la ocasión.</p></div>
             </div>
         </section>
 
-        <!-- Los Pilares de Eliud -->
+        <!-- Todo Sobre Eliud -->
         <section class="my-16 md:my-24">
-            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Los Pilares de la Comunidad</h2>
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Cada Persona Cuenta</h3><p class="text-gray-400">Aquí no eres un número más. Eliud saluda a todos y agradece personalmente cada nuevo follow. Tu presencia importa.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Sagrado</h3><p class="text-gray-400">Es de los pocos que se toma el tiempo para leer cada mensaje. La conversación con el chat es tan importante como el juego.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3><p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo es agradecida con la misma energía. Aquí, todo suma.</p></div>
-            </div>
-        </section>
-
-        <!-- Momentos Icónicos -->
-        <section class="my-16 md:my-24">
-            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Momentos Icónicos</h2>
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Todo Sobre Eliud</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Fábrica de Memes</h3><p class="text-gray-400">Eliud tiene un talento natural para hacer caras que quedan "escrachadas" para la posteridad. Cada stream es una nueva oportunidad para un meme.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Rey de las Predicciones</h3><p class="text-gray-400">Acertó varias teorías de "El Juego del Calamar" T1. Ahora se prepara para analizar y predecir cada detalle de la T2.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Baile de la Sub</h3><p class="text-gray-400">Cada suscripción activa un protocolo sagrado: un baile preparado con dedicación para agradecer el apoyo.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Cama Rota</h3><p class="text-gray-400">La historia de cómo un salto épico terminó con su cama y lo condenó a tener el colchón en el piso. Un sacrificio por el contenido.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Estilo de Juego</h3><p class="text-gray-400">Frecuenta Fortnite y Roblox, pero su verdadera pasión son las campañas de historia, aunque le tome dos meses terminarlas. Es el "Rey de las Predicciones" desde que acertó el final de El Juego del Calamar T1.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Rituales Sagrados</h3><p class="text-gray-400">La pausa para bajar por comida es un clásico, siempre seguida de un video antes de volver al juego. Y si lo persiguen, se activa el protocolo "Grito de Niña", un sonido agudo e inconfundible.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Datos Curiosos</h3><p class="text-gray-400">Es una fábrica de memes andante gracias a sus caras. Hace cosplay en días festivos (como Papá Noel). Odia su pelo en stream pero le gusta fuera de cámaras. Su setup actual tiene paredes blancas, una cortina y un colchón en el piso, cortesía de "La Cama Rota".</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Ficha Técnica</h3><p class="text-gray-400">Originario de México, con un amor incondicional por los tacos y GTA: San Andreas. Usa lentes muy seguido, que son parte de su look característico.</p></div>
             </div>
         </section>
         
+        <!-- Frases Célebres -->
+        <section class="my-16 md:my-24">
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Frases Célebres</h2>
+            <div class="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"A poco si mi apa"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"No mames"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Chinga su ronea loco"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"A la verga"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"E wey"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Estúpido"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Chingue su madre"</p></div>
+                <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Epaaa"</p></div>
+            </div>
+        </section>
+
         <!-- Agenda Semanal -->
         <section class="text-center my-16 md:my-24">
             <h2 class="font-title font-bold text-4xl md:text-5xl mb-12">Agenda Semanal</h2>
-            <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm card-border-gradient rounded-lg p-8">
+            <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700 rounded-lg p-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-700 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-white">Lunes a Jueves</h3><p class="text-gray-400 mt-2">Gaming, charlas y música. El punto de encuentro principal.</p></div>
                     <div class="border-b-2 md:border-b-0 md:border-r-2 border-red-500/50 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-red-400">Viernes de Terror</h3><p class="text-gray-300 mt-2">Juegos de terror que ponen a prueba los nervios (y los gritos) de Eliud.</p></div>
                     <div><h3 class="font-bold text-xl text-white">Fin de Semana</h3><p class="text-gray-400 mt-2"><strong class="text-white">Sábados:</strong> Contenido variado. <br><strong class="text-white">Domingos:</strong> Noche de pelis/series. Ahora: <span class="text-cyan-400">El Juego del Calamar T2</span>.</p></div>
                 </div>
-                <!-- HORARIO CORREGIDO -->
                 <p class="text-4xl font-black text-gradient mt-12">Todos los días, 7-8 PM (Hora de México)</p>
             </div>
         </section>

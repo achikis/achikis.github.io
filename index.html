@@ -9,7 +9,7 @@
     <!-- Incluimos Google Fonts para una tipografía moderna -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;500;700&family=Teko:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Estilos personalizados y fuentes */
         body {
@@ -19,6 +19,9 @@
         }
         .font-title {
             font-family: 'Poppins', sans-serif;
+        }
+        .font-gta {
+            font-family: 'Teko', sans-serif;
         }
         /* Efecto de gradiente para el texto */
         .text-gradient {
@@ -30,6 +33,7 @@
         .card-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #222;
+            background: linear-gradient(to top, #111111, #181818);
         }
         .card-hover:hover {
             transform: translateY(-8px);
@@ -44,38 +48,24 @@
 <body class="antialiased">
 
     <!-- Contenedor del Fondo de Íconos -->
-    <div class="fixed inset-0 z-0 opacity-[0.03]">
+    <div class="fixed inset-0 z-0 opacity-[0.04]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <pattern id="pattern-icons" patternUnits="userSpaceOnUse" width="250" height="250" class="text-white">
-                    <!-- Lentes -->
-                    <g transform="translate(25, 25)">
+                <pattern id="pattern-icons" patternUnits="userSpaceOnUse" width="300" height="300" class="text-white">
+                    <!-- GTA SA Logo -->
+                    <g transform="translate(50, 50)">
+                        <text x="0" y="30" class="font-gta text-[50px]" fill="currentColor" style="font-weight:700;">GTA:SA</text>
+                    </g>
+                    <!-- Mouse -->
+                     <g transform="translate(200, 150)">
+                        <rect x="0" y="0" width="30" height="45" rx="15" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <line x1="15" y1="0" x2="15" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </g>
+                     <!-- Lentes -->
+                    <g transform="translate(25, 200) scale(1.2)">
                         <circle cx="15" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
                         <circle cx="45" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
                         <path d="M25 15 H35" stroke="currentColor" stroke-width="2" fill="none"/>
-                    </g>
-                    <!-- Taco -->
-                    <g transform="translate(150, 50)">
-                        <path d="M0 20 Q 20 0 40 20 L 20 20 Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M10 20 V15 M20 20 V10 M30 20 V15" stroke="currentColor" stroke-width="2" fill="none"/>
-                    </g>
-                    <!-- Teclado -->
-                    <g transform="translate(175, 150)">
-                        <rect x="0" y="0" width="60" height="30" rx="5" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <rect x="5" y="5" width="10" height="8" fill="currentColor"/>
-                        <rect x="18" y="5" width="10" height="8" fill="currentColor"/>
-                        <rect x="31" y="5" width="10" height="8" fill="currentColor"/>
-                        <rect x="44" y="5" width="10" height="8" fill="currentColor"/>
-                        <rect x="5" y="17" width="50" height="8" fill="currentColor"/>
-                    </g>
-                    <!-- Micrófono -->
-                    <g transform="translate(50, 175)">
-                        <rect x="15" y="0" width="20" height="35" rx="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <path d="M15 25 H35 M25 35 V45 L15 55 M25 45 L35 55" stroke="currentColor" stroke-width="2" fill="none"/>
-                    </g>
-                    <!-- Logo de Twitch -->
-                    <g transform="translate(100, 100)">
-                        <path d="M6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z" fill="currentColor"/>
                     </g>
                 </pattern>
             </defs>
@@ -83,10 +73,9 @@
         </svg>
     </div>
 
-    <!-- Contenedor Principal (con z-index para estar por encima del fondo) -->
+    <!-- Contenedor Principal -->
     <div class="relative z-10 container mx-auto px-4 py-8 md:py-16">
 
-        <!-- Sección de Encabezado (Hero) -->
         <header class="text-center mb-20 md:mb-32">
             <h1 class="font-title font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter text-gradient">
                 ELIUD
@@ -100,50 +89,52 @@
             </a>
         </header>
 
-        <!-- Sección "Los Pilares de Eliud" -->
+        <!-- Ficha Técnica -->
         <section class="my-16 md:my-24">
-            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Los Pilares de la Comunidad</h2>
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Ficha Técnica</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
-                    <h3 class="font-title font-bold text-2xl text-white mb-3">Cada Persona Cuenta</h3>
-                    <p class="text-gray-400">Aquí no eres un número más. Eliud saluda a todos los que llegan y agradece personalmente cada nuevo follow. Tu presencia importa.</p>
-                </div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
-                    <h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Sagrado</h3>
-                    <p class="text-gray-400">Es de los pocos que se toma el tiempo para leer cada mensaje. La conversación con el chat es tan importante como el juego mismo.</p>
-                </div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
-                    <h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3>
-                    <p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo es agradecida con la misma energía y aprecio. Aquí, todo suma.</p>
-                </div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Origen</h3><p class="text-gray-400 text-lg">México. La tierra de los tacos y las leyendas.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Juego Clásico</h3><p class="text-gray-400 text-lg">GTA: San Andreas. "Ah shit, here we go again."</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Habilidad</h3><p class="text-gray-400 text-lg">El Grito de Niña. Un sonido agudo que resuena en los momentos de pánico.</p></div>
             </div>
         </section>
 
-        <!-- Sección "Momentos Icónicos" -->
+        <!-- Los Pilares de Eliud -->
+        <section class="my-16 md:my-24">
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Los Pilares de la Comunidad</h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Cada Persona Cuenta</h3><p class="text-gray-400">Aquí no eres un número más. Eliud saluda a todos y agradece personalmente cada nuevo follow. Tu presencia importa.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Sagrado</h3><p class="text-gray-400">Es de los pocos que se toma el tiempo para leer cada mensaje. La conversación con el chat es tan importante como el juego.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3><p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo es agradecida con la misma energía. Aquí, todo suma.</p></div>
+            </div>
+        </section>
+
+        <!-- Momentos Icónicos -->
         <section class="my-16 md:my-24">
             <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Momentos Icónicos</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Fábrica de Memes</h3><p class="text-gray-400">Eliud tiene un talento natural para hacer caras que quedan "escrachadas" para la posteridad. Cada stream es una nueva oportunidad para un meme.</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Rey de las Predicciones</h3><p class="text-gray-400">Acertó varias teorías de "El Juego del Calamar" T1. Ahora se prepara para analizar y predecir cada detalle de la T2. ¿Lo hará de nuevo?</p></div>
-                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Grito Legendario</h3><p class="text-gray-400">Cuando lo persiguen en un juego, prepárate para un grito agudo que podría romper cristales. Un sello inconfundible de la casa.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Rey de las Predicciones</h3><p class="text-gray-400">Acertó varias teorías de "El Juego del Calamar" T1. Ahora se prepara para analizar y predecir cada detalle de la T2.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Baile de la Sub</h3><p class="text-gray-400">Cada suscripción activa un protocolo sagrado: un baile preparado con dedicación para agradecer el apoyo.</p></div>
                 <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Cama Rota</h3><p class="text-gray-400">La historia de cómo un salto épico terminó con su cama y lo condenó a tener el colchón en el piso. Un sacrificio por el contenido.</p></div>
             </div>
         </section>
         
-        <!-- Sección de Agenda Semanal -->
+        <!-- Agenda Semanal -->
         <section class="text-center my-16 md:my-24">
             <h2 class="font-title font-bold text-4xl md:text-5xl mb-12">Agenda Semanal</h2>
-            <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700 rounded-lg p-8">
+            <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm card-border-gradient rounded-lg p-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-700 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-white">Lunes a Jueves</h3><p class="text-gray-400 mt-2">Gaming, charlas y música. El punto de encuentro principal.</p></div>
                     <div class="border-b-2 md:border-b-0 md:border-r-2 border-red-500/50 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-red-400">Viernes de Terror</h3><p class="text-gray-300 mt-2">Juegos de terror que ponen a prueba los nervios (y los gritos) de Eliud.</p></div>
                     <div><h3 class="font-bold text-xl text-white">Fin de Semana</h3><p class="text-gray-400 mt-2"><strong class="text-white">Sábados:</strong> Contenido variado. <br><strong class="text-white">Domingos:</strong> Noche de pelis/series. Ahora: <span class="text-cyan-400">El Juego del Calamar T2</span>.</p></div>
                 </div>
-                <p class="text-4xl font-black text-gradient mt-12">Todos los días a las 20:00 HS</p>
+                <!-- HORARIO CORREGIDO -->
+                <p class="text-4xl font-black text-gradient mt-12">Todos los días, 7-8 PM (Hora de México)</p>
             </div>
         </section>
 
-        <!-- Footer con Redes Sociales -->
+        <!-- Footer -->
         <footer class="text-center border-t border-gray-800 pt-12">
             <p class="text-lg font-bold mb-4">¡ÚNETE A LA COMUNIDAD!</p>
             <div class="flex justify-center items-center space-x-6">

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliud - El Streamer del Pueblo</title>
+    <!-- Incluimos Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluimos Google Fonts para una tipografía moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados y fuentes */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Un negro casi puro */
+            color: #FFFFFF;
+        }
+        .font-title {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Efecto de gradiente para el texto */
+        .text-gradient {
+            background: linear-gradient(90deg, #FFFFFF, #C0C0C0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Animación sutil para las tarjetas */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #222;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        /* Estilo para los íconos de redes sociales */
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Contenedor del Fondo de Íconos -->
+    <div class="fixed inset-0 z-0 opacity-[0.03]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="pattern-icons" patternUnits="userSpaceOnUse" width="250" height="250" class="text-white">
+                    <!-- Lentes -->
+                    <g transform="translate(25, 25)">
+                        <circle cx="15" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="45" cy="15" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M25 15 H35" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </g>
+                    <!-- Taco -->
+                    <g transform="translate(150, 50)">
+                        <path d="M0 20 Q 20 0 40 20 L 20 20 Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M10 20 V15 M20 20 V10 M30 20 V15" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </g>
+                    <!-- Teclado -->
+                    <g transform="translate(175, 150)">
+                        <rect x="0" y="0" width="60" height="30" rx="5" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <rect x="5" y="5" width="10" height="8" fill="currentColor"/>
+                        <rect x="18" y="5" width="10" height="8" fill="currentColor"/>
+                        <rect x="31" y="5" width="10" height="8" fill="currentColor"/>
+                        <rect x="44" y="5" width="10" height="8" fill="currentColor"/>
+                        <rect x="5" y="17" width="50" height="8" fill="currentColor"/>
+                    </g>
+                    <!-- Micrófono -->
+                    <g transform="translate(50, 175)">
+                        <rect x="15" y="0" width="20" height="35" rx="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M15 25 H35 M25 35 V45 L15 55 M25 45 L35 55" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </g>
+                    <!-- Logo de Twitch -->
+                    <g transform="translate(100, 100)">
+                        <path d="M6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z" fill="currentColor"/>
+                    </g>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#pattern-icons)"></rect>
+        </svg>
+    </div>
+
+    <!-- Contenedor Principal (con z-index para estar por encima del fondo) -->
+    <div class="relative z-10 container mx-auto px-4 py-8 md:py-16">
+
+        <!-- Sección de Encabezado (Hero) -->
+        <header class="text-center mb-20 md:mb-32">
+            <h1 class="font-title font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter text-gradient">
+                ELIUD
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-4 max-w-2xl mx-auto">
+                Streamer mexicano, amante de los tacos y el único que puede romper una cama saltando y gritar como niña en la misma semana.
+            </p>
+            <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" 
+               class="inline-block mt-8 bg-white text-black font-bold py-4 px-10 rounded-full text-lg uppercase transition-transform transform hover:scale-105">
+                Unirse al Stream
+            </a>
+        </header>
+
+        <!-- Sección "Los Pilares de Eliud" -->
+        <section class="my-16 md:my-24">
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Los Pilares de la Comunidad</h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
+                    <h3 class="font-title font-bold text-2xl text-white mb-3">Cada Persona Cuenta</h3>
+                    <p class="text-gray-400">Aquí no eres un número más. Eliud saluda a todos los que llegan y agradece personalmente cada nuevo follow. Tu presencia importa.</p>
+                </div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
+                    <h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Sagrado</h3>
+                    <p class="text-gray-400">Es de los pocos que se toma el tiempo para leer cada mensaje. La conversación con el chat es tan importante como el juego mismo.</p>
+                </div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg">
+                    <h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3>
+                    <p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo es agradecida con la misma energía y aprecio. Aquí, todo suma.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección "Momentos Icónicos" -->
+        <section class="my-16 md:my-24">
+            <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Momentos Icónicos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Fábrica de Memes</h3><p class="text-gray-400">Eliud tiene un talento natural para hacer caras que quedan "escrachadas" para la posteridad. Cada stream es una nueva oportunidad para un meme.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Rey de las Predicciones</h3><p class="text-gray-400">Acertó varias teorías de "El Juego del Calamar" T1. Ahora se prepara para analizar y predecir cada detalle de la T2. ¿Lo hará de nuevo?</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">El Grito Legendario</h3><p class="text-gray-400">Cuando lo persiguen en un juego, prepárate para un grito agudo que podría romper cristales. Un sello inconfundible de la casa.</p></div>
+                <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">La Cama Rota</h3><p class="text-gray-400">La historia de cómo un salto épico terminó con su cama y lo condenó a tener el colchón en el piso. Un sacrificio por el contenido.</p></div>
+            </div>
+        </section>
+        
+        <!-- Sección de Agenda Semanal -->
+        <section class="text-center my-16 md:my-24">
+            <h2 class="font-title font-bold text-4xl md:text-5xl mb-12">Agenda Semanal</h2>
+            <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700 rounded-lg p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-700 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-white">Lunes a Jueves</h3><p class="text-gray-400 mt-2">Gaming, charlas y música. El punto de encuentro principal.</p></div>
+                    <div class="border-b-2 md:border-b-0 md:border-r-2 border-red-500/50 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-red-400">Viernes de Terror</h3><p class="text-gray-300 mt-2">Juegos de terror que ponen a prueba los nervios (y los gritos) de Eliud.</p></div>
+                    <div><h3 class="font-bold text-xl text-white">Fin de Semana</h3><p class="text-gray-400 mt-2"><strong class="text-white">Sábados:</strong> Contenido variado. <br><strong class="text-white">Domingos:</strong> Noche de pelis/series. Ahora: <span class="text-cyan-400">El Juego del Calamar T2</span>.</p></div>
+                </div>
+                <p class="text-4xl font-black text-gradient mt-12">Todos los días a las 20:00 HS</p>
+            </div>
+        </section>
+
+        <!-- Footer con Redes Sociales -->
+        <footer class="text-center border-t border-gray-800 pt-12">
+            <p class="text-lg font-bold mb-4">¡ÚNETE A LA COMUNIDAD!</p>
+            <div class="flex justify-center items-center space-x-6">
+                <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-400 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.714v5.143H11.57zm4.571 0h1.714v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z"></path></svg></a>
+                <a href="https://www.instagram.com/el1uuuuu?igsh=NXpwcDRwdzdsbXR1" target="_blank" rel="noopener noreferrer" class="text-white hover:text-pink-500 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+                <a href="https://discord.gg/ZjVzgH7A" target="_blank" rel="noopener noreferrer" class="text-white hover:text-indigo-400 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472h-15.08c-1.356 0-2.46-1.104-2.46-2.472v-19.056c0-1.368 1.104-2.472 2.46-2.472h15.08zm-4.632 15.672c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032zm-6.264 0c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032z"/></svg></a>
+            </div>
+            <p class="text-gray-500 text-sm mt-12">Página diseñada con cariño por la comunidad.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

@@ -11,11 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;500;700&family=Teko:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos personalizados y fuentes */
+        /* Estilos base y fuentes */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0A0A0A; /* Un negro casi puro */
             color: #FFFFFF;
+            overflow-x: hidden; /* Evita el scroll horizontal causado por animaciones */
         }
         .font-title {
             font-family: 'Poppins', sans-serif;
@@ -23,104 +24,288 @@
         .font-gta {
             font-family: 'Teko', sans-serif;
         }
+        /* El degradado base para el título principal, sin transición en el background-image */
         .text-gradient {
             background: linear-gradient(90deg, #FFFFFF, #C0C0C0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             border: 1px solid #222;
             background: #111111;
+            position: relative; /* Necesario para posicionar el pseudo-elemento */
+            overflow: hidden; /* Asegura que las partículas no se salgan de la tarjeta */
         }
         .card-hover:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+            border-color: #444; /* Un borde más visible al hover */
+        }
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
         }
         .social-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.2); /* Más pronunciado */
         }
 
-        /* --- NUEVA ANIMACIÓN DE ENTRADA MEJORADA --- */
+        /* --- Animación de Partículas en Tarjetas (Más visible!) --- */
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            inset: -50% -50% -50% -50%; /* Extender mucho más para un efecto continuo de entrada/salida */
+            z-index: 0; /* Detrás del contenido de la tarjeta */
+            pointer-events: none; /* Asegura que no interfiera con clics o selecciones */
+            /* Aumentar opacidad y tamaño de las partículas */
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 40% 50%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.5) 3px, transparent 3px);
+            background-size: 80px 80px; /* Espaciado de las "bolitas" */
+            animation: dotsFall 20s linear infinite; /* Animación de caída lenta y continua */
+        }
+
+        .card-hover > * {
+            position: relative; /* Asegura que el contenido de la tarjeta esté por encima del pseudo-elemento */
+            z-index: 1;
+        }
+
+        /* Apply particle animation to the agenda card as well */
+        .agenda-card {
+            position: relative; /* Needed for pseudo-element */
+            overflow: hidden; /* Ensures particles don't spill out */
+        }
+
+        .agenda-card::before {
+            content: '';
+            position: absolute;
+            inset: -50% -50% -50% -50%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 40% 50%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.5) 3px, transparent 3px),
+                              radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.5) 3px, transparent 3px);
+            background-size: 80px 80px;
+            animation: dotsFall 20s linear infinite;
+        }
+
+        .agenda-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        @keyframes dotsFall {
+            from { background-position: 0% 0%; }
+            to { background-position: 0% 100%; } /* Falls downwards */
+        }
+
+        /* --- IMPROVED ENTRY ANIMATION (SPLASH SCREEN) --- */
         #splash-screen {
             position: fixed;
             inset: 0;
             z-index: 100;
             background-color: #0A0A0A;
-            /* Animación para ocultar el splash al final */
-            animation: fadeOutSplashScreen 1s 3.5s forwards;
-        }
-        #animated-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            /* Animación que mueve el contenedor hacia arriba */
-            animation: moveUpContainer 1.5s 1s forwards cubic-bezier(0.76, 0, 0.24, 1);
-        }
-        #animated-title {
-             /* Animación que encoge el título */
-            animation: scaleDownTitle 1.5s 1s forwards cubic-bezier(0.76, 0, 0.24, 1);
-        }
-        #animated-subtitle {
-            opacity: 0;
-            /* Animación que muestra el subtítulo */
-            animation: fadeInSubtitle 0.5s 2.5s forwards;
-        }
-        #main-content {
-            opacity: 0;
-            /* Animación que muestra el contenido principal */
-            animation: fadeInContent 1s 3s forwards;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Animation to hide the splash at the end */
+            animation: fadeOutSplashScreen 0.8s 3.5s forwards; /* Faster at the end */
         }
 
-        @keyframes moveUpContainer {
-            to {
-                /* Mueve el contenedor hacia la posición del header */
-                top: 10rem; /* Ajusta este valor para que coincida con la posición final del header */
-            }
+        #splash-title {
+            opacity: 0;
+            transform: scale(0.8);
+            filter: blur(5px);
+            /* Glitch effect for 3 iterations, then fades in and scales */
+            animation: fadeInScaleBlur 1.2s ease-out forwards, glitchEffect 0.5s steps(2, end) 3;
+            animation-delay: 0.5s; /* Delay for the glitch to be visible at the start */
         }
-        @keyframes scaleDownTitle {
-            to {
-                /* Achica el texto al tamaño final del header */
-                transform: scale(0.6); 
-            }
+
+        #splash-subtitle {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInTranslate 0.8s ease-out forwards;
+            animation-delay: 2s; /* Appears after the title */
         }
-        @keyframes fadeInSubtitle {
+
+        #main-content {
+            opacity: 0;
+            /* Animation that shows the main content */
+            animation: fadeInContent 1s 3.8s forwards; /* Appears after fadeOutSplashScreen */
+        }
+
+        @keyframes fadeInScaleBlur {
+            0% { opacity: 0; transform: scale(0.8); filter: blur(5px); }
+            50% { opacity: 1; transform: scale(1.05); filter: blur(0px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0px); }
+        }
+
+        @keyframes fadeInTranslate {
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
+
         @keyframes fadeOutSplashScreen {
             to {
                 opacity: 0;
                 visibility: hidden;
             }
         }
+
         @keyframes fadeInContent {
             to {
                 opacity: 1;
             }
         }
+
+        /* Efecto Glitch para el título del splash */
+        @keyframes glitchEffect {
+            0% {
+                text-shadow: 2px 0 0 red, -2px 0 0 blue;
+                transform: translate(0px, 0px);
+            }
+            25% {
+                text-shadow: -2px 0 0 red, 2px 0 0 blue;
+                transform: translate(1px, -1px);
+            }
+            50% {
+                text-shadow: 2px 0 0 red, -2px 0 0 blue;
+                transform: translate(-1px, 1px);
+            }
+            75% {
+                text-shadow: -2px 0 0 red, 2px 0 0 blue;
+                transform: translate(1px, 1px);
+            }
+            100% {
+                text-shadow: 2px 0 0 red, -2px 0 0 blue;
+                transform: translate(0px, 0px);
+            }
+        }
+
+        /* --- SCROLL ANIMATIONS (SCROLL-REVEAL) --- */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            /* Small fixed delay for subtle staggering */
+            transition-delay: 0.1s; /* Applied directly in CSS */
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll[data-animation="fade-in-up"] {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .animate-on-scroll[data-animation="fade-in-up"].animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll[data-animation="fade-in-scale"] {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .animate-on-scroll[data-animation="fade-in-scale"].animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- SVG BACKGROUND ANIMATION --- */
+        @keyframes background-move {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-50px) translateY(-50px); } /* Subtle movement */
+        }
+        #background-pattern-rect {
+            animation: background-move 120s linear infinite alternate; /* Very slow and alternating */
+        }
+
+        /* --- Animation for "Join Stream" button --- */
+        .stream-button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .stream-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+        .stream-button:hover::before {
+            left: 100%;
+        }
+        .stream-button:active {
+            transform: scale(0.98);
+        }
+
+        /* --- NUEVOS EFECTOS DE HOVER EN TÍTULOS --- */
+
+        /* Eliud H1 hover effect */
+        header h1.text-gradient:hover {
+            /* Degradado de blanco a gris oscuro, de arriba a abajo */
+            background: linear-gradient(to bottom, #FFFFFF 50%, #4A4A4A 100%);
+            -webkit-background-clip: text; /* Re-apply */
+            -webkit-text-fill-color: transparent; /* Re-apply */
+        }
+
+        /* Card H3 hover effect (when .card-hover is hovered) */
+        .card-hover:hover h3 {
+            color: #FFFFFF; /* Asegura que el texto base sea blanco */
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3); /* Iluminación sutil */
+            transition: text-shadow 0.3s ease; /* Transición suave para el brillo */
+        }
+        /* Restablecer text-shadow cuando no está en hover */
+        .card-hover h3 {
+            text-shadow: none;
+            transition: text-shadow 0.3s ease;
+        }
+
+
+        /* Agenda Semanal H2 hover effect */
+        section h2.font-title:hover {
+            color: #FFFFFF; /* Asegura que el texto base sea blanco */
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.3); /* Iluminación sutil */
+            transition: text-shadow 0.3s ease; /* Transición suave para el brillo */
+        }
+        /* Restablecer text-shadow cuando no está en hover */
+        section h2.font-title {
+            text-shadow: none;
+            transition: text-shadow 0.3s ease;
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Pantalla de Carga con Animación (NUEVO) -->
+    <!-- Loading Screen with Animation -->
     <div id="splash-screen">
-        <div id="animated-container">
-            <h1 id="animated-title" class="font-title font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter text-gradient">
+        <div class="text-center">
+            <h1 id="splash-title" class="font-title font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter text-gradient">
                 ELIUD
             </h1>
-            <p id="animated-subtitle" class="text-lg md:text-xl text-gray-300 mt-4">
+            <p id="splash-subtitle" class="text-lg md:text-xl text-gray-300 mt-4">
                 El mejor streamer
             </p>
         </div>
     </div>
 
-    <!-- Contenido Principal (Ahora envuelto en un div) -->
+    <!-- Main Content -->
     <div id="main-content">
-        <!-- Contenedor del Fondo de Íconos -->
+        <!-- Icon Background Container -->
         <div class="fixed inset-0 z-0 opacity-[0.03]">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -131,11 +316,11 @@
                         <g transform="translate(150, 250)"><path d="M0 20 Q 20 0 40 20 L 20 20 Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 20 V15 M20 20 V10 M30 20 V15" stroke="currentColor" stroke-width="2" fill="none"/></g>
                     </pattern>
                 </defs>
-                <rect width="100%" height="100%" fill="url(#pattern-icons)"></rect>
+                <rect id="background-pattern-rect" width="100%" height="100%" fill="url(#pattern-icons)"></rect>
             </svg>
         </div>
 
-        <!-- Contenedor Principal -->
+        <!-- Main Container -->
         <div class="relative z-10 container mx-auto px-4 py-8 md:py-16">
             <header class="text-center mb-20 md:mb-32">
                 <h1 class="font-title font-black text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter text-gradient">
@@ -145,66 +330,103 @@
                     Streamer mexicano, amante de los tacos y el único que puede romper una cama saltando y gritar como niña en la misma semana.
                 </p>
                 <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" 
-                   class="inline-block mt-8 bg-white text-black font-bold py-4 px-10 rounded-full text-lg uppercase transition-transform transform hover:scale-105">
+                   class="inline-block mt-8 bg-white text-black font-bold py-4 px-10 rounded-full text-lg uppercase transition-transform transform hover:scale-105 stream-button">
                     Unirse al Stream
                 </a>
+                <!-- Social media icons in the header -->
+                <div class="flex justify-center items-center space-x-6 mt-8">
+                    <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-400 social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.714v5.143H11.57zm4.571 0h1.714v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z"></path></svg></a>
+                    <a href="https://www.instagram.com/el1uuuuu?igsh=NXpwcDRwdzdsbXR1" target="_blank" rel="noopener noreferrer" class="text-white hover:text-pink-500 social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+                    <a href="https://discord.gg/ZjVzgH7A" target="_blank" rel="noopener noreferrer" class="text-white hover:text-indigo-400 social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472h-15.08c-1.356 0-2.46-1.104-2.46-2.472v-19.056c0-1.368 1.104-2.472 2.46-2.472h15.08zm-4.632 15.672c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.032-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032zm-6.264 0c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032z"/></svg></a>
+                </div>
             </header>
 
             <section class="my-16 md:my-24">
-                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">El Corazón del Canal</h2>
+                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12 animate-on-scroll" data-animation="fade-in-up">El Corazón del Canal</h2>
                 <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Humildad Ante Todo</h3><p class="text-gray-400">Eliud mantiene los pies en la tierra. Es una persona genuina que valora a su comunidad por encima de todo.</p></div>
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Protagonista</h3><p class="text-gray-400">Cada persona que llega recibe un saludo. Cada follow, un agradecimiento. Cada mensaje es leído. Aquí, tú importas.</p></div>
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg"><h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3><p class="text-gray-400">No importa si es un bit o mil, cada muestra de apoyo se celebra con la misma energía, usualmente con un baile preparado para la ocasión.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Humildad Ante Todo</h3><p class="text-gray-400">Eliud mantiene los pies en la tierra. Es una persona genuina que valora a su comunidad por encima de todo.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">El Chat es Protagonista</h3><p class="text-gray-400">Cada persona que llega recibe un saludo. Cada follow, un agradecimiento. Cada mensaje es leído. Aquí, tú importas.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm p-8 rounded-lg animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Todo Apoyo se Celebra</h3><p class="text-gray-400">Si te suscribes por un mes o más, ¡Eliud te dedicará un baile especial con música! Cada bit y cada muestra de apoyo se celebra con la misma energía.</p></div>
                 </div>
             </section>
 
             <section class="my-16 md:my-24">
-                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Todo Sobre Eliud</h2>
+                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12 animate-on-scroll" data-animation="fade-in-up">Todo Sobre Eliud</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Estilo de Juego</h3><p class="text-gray-400">Frecuenta Fortnite y Roblox, pero su verdadera pasión son las campañas de historia, aunque le tome dos meses terminarlas. Es el "Rey de las Predicciones" desde que acertó el final de El Juego del Calamar T1.</p></div>
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Rituales Sagrados</h3><p class="text-gray-400">La pausa para bajar por comida es un clásico, siempre seguida de un video antes de volver al juego. Y si lo persiguen, se activa el protocolo "Grito de Niña", un sonido agudo e inconfundible.</p></div>
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Datos Curiosos</h3><p class="text-gray-400">Es una fábrica de memes andante gracias a sus caras. Hace cosplay en días festivos (como Papá Noel). Odia su pelo en stream pero le gusta fuera de cámaras. Su setup actual tiene paredes blancas, una cortina y un colchón en el piso, cortesía de "La Cama Rota".</p></div>
-                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6"><h3 class="font-title font-bold text-2xl text-white mb-3">Ficha Técnica</h3><p class="text-gray-400">Originario de México, con un amor incondicional por los tacos y GTA: San Andreas. Usa lentes muy seguido, que son parte de su look característico.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Estilo de Juego</h3><p class="text-gray-400">Frecuenta Fortnite y Roblox, pero su verdadera pasión son las campañas de historia, aunque le tome dos meses terminarlas. Es el "Rey de las Predicciones" desde que acertó varias predicciones de El Juego del Calamar T1.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Rituales Sagrados</h3><p class="text-gray-400">La pausa para bajar por comida es un clásico, siempre seguida de un video antes de volver al juego. Y si lo persiguen, se activa el protocolo "Grito de Niña", un sonido agudo e inconfundible.</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Datos Curiosos</h3><p class="text-gray-400">Es una fábrica de memes andante gracias a sus caras. Hace cosplay en días festivos (como Papá Noel). Odia su pelo en stream pero le gusta fuera de cámaras. Su setup actual tiene paredes blancas, una cortina y un colchón en el piso, cortesía de "La Cama Rota".</p></div>
+                    <div class="card-hover bg-gray-900/80 backdrop-blur-sm rounded-lg p-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-title font-bold text-2xl text-white mb-3">Ficha Técnica</h3><p class="text-gray-400">Originario de México, con un amor incondicional por los tacos y GTA: San Andreas. Usa lentes muy seguido, que son parte de su look característico.</p></div>
                 </div>
             </section>
             
             <section class="my-16 md:my-24">
-                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12">Frases Célebres</h2>
+                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12 animate-on-scroll" data-animation="fade-in-up">Frases Célebres</h2>
                 <div class="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"A poco si mi apa"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"No mames"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Chinga su ronea loco"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"A la verga"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"E wey"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Estúpido"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Chingue su madre"</p></div>
-                    <div class="bg-gray-800 p-3 px-4 rounded-full"><p class="font-semibold">"Epaaa"</p></div>
+                    <!-- Each phrase will have its own scale animation -->
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"A poco si mi apa"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"No mames"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"Chinga su ronea loco"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"A la verga"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"E wey"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"Estúpido"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"Chingue su madre"</p></div>
+                    <div class="bg-gray-800 p-3 px-4 rounded-full animate-on-scroll" data-animation="fade-in-scale"><p class="font-semibold">"Epaaa"</p></div>
                 </div>
             </section>
 
             <section class="text-center my-16 md:my-24">
-                <h2 class="font-title font-bold text-4xl md:text-5xl mb-12">Agenda Semanal</h2>
-                <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700 rounded-lg p-8">
+                <h2 class="font-title font-bold text-4xl md:text-5xl text-center mb-12 animate-on-scroll" data-animation="fade-in-up">Agenda Semanal</h2>
+                <!-- Added agenda-card class for particle animation -->
+                <div class="max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700 rounded-lg p-8 animate-on-scroll agenda-card" data-animation="fade-in-up">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-700 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-white">Lunes a Jueves</h3><p class="text-gray-400 mt-2">Gaming, charlas y música. El punto de encuentro principal.</p></div>
-                        <div class="border-b-2 md:border-b-0 md:border-r-2 border-red-500/50 pb-6 md:pb-0 md:pr-6"><h3 class="font-bold text-xl text-red-400">Viernes de Terror</h3><p class="text-gray-300 mt-2">Juegos de terror que ponen a prueba los nervios (y los gritos) de Eliud.</p></div>
-                        <div><h3 class="font-bold text-xl text-white">Fin de Semana</h3><p class="text-gray-400 mt-2"><strong class="text-white">Sábados:</strong> Contenido variado. <br><strong class="text-white">Domingos:</strong> Noche de pelis/series. Ahora: <span class="text-cyan-400">El Juego del Calamar T2</span>.</p></div>
+                        <div class="border-b-2 md:border-b-0 md:border-r-2 border-gray-700 pb-6 md:pb-0 md:pr-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-bold text-xl text-white mb-3">Lunes a Jueves</h3><p class="text-gray-400 mt-2">Gaming, charlas y música. El punto de encuentro principal.</p></div>
+                        <div class="border-b-2 md:border-b-0 md:border-r-2 border-red-500/50 pb-6 md:pb-0 md:pr-6 animate-on-scroll" data-animation="fade-in-up"><h3 class="font-bold text-xl text-red-400">Viernes de Terror</h3><p class="text-gray-300 mt-2">Juegos de terror que ponen a prueba los nervios (y los gritos) de Eliud.</p></div>
+                        <div class="animate-on-scroll" data-animation="fade-in-up"><h3 class="font-bold text-xl text-white mb-3">Fin de Semana</h3><p class="text-gray-400 mt-2"><strong class="text-white">Sábados:</strong> Contenido variado. <br><strong class="text-white">Domingos:</strong> Noche de pelis/series. Ahora: <span class="text-cyan-400">El Juego del Calamar T2</span>.</p></div>
                     </div>
-                    <p class="text-4xl font-black text-gradient mt-12">Todos los días, 7-8 PM (Hora de México)</p>
+                    <p class="text-4xl font-black text-gradient mt-12 animate-on-scroll" data-animation="fade-in-up">Todos los días, 7-8 PM (Hora de México)</p>
                 </div>
             </section>
 
             <footer class="text-center border-t border-gray-800 pt-12">
-                <p class="text-lg font-bold mb-4">¡ÚNETE A LA COMUNIDAD!</p>
+                <p class="text-lg font-bold mb-4 animate-on-scroll" data-animation="fade-in-up">¡ÚNETE A LA COMUNIDAD!</p>
                 <div class="flex justify-center items-center space-x-6">
-                    <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-400 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.714v5.143H11.57zm4.571 0h1.714v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z"></path></svg></a>
-                    <a href="https://www.instagram.com/el1uuuuu?igsh=NXpwcDRwdzdsbXR1" target="_blank" rel="noopener noreferrer" class="text-white hover:text-pink-500 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
-                    <a href="https://discord.gg/ZjVzgH7A" target="_blank" rel="noopener noreferrer" class="text-white hover:text-indigo-400 transition-transform social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472h-15.08c-1.356 0-2.46-1.104-2.46-2.472v-19.056c0-1.368 1.104-2.472 2.46-2.472h15.08zm-4.632 15.672c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032zm-6.264 0c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032z"/></svg></a>
+                    <a href="https://www.twitch.tv/el1uuud?sr=a" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-400 social-icon animate-on-scroll" data-animation="fade-in-up"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M11.571 4.714h1.714v5.143H11.57zm4.571 0h1.714v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0H6zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714v9.429z"></path></svg></a>
+                    <a href="https://www.instagram.com/el1uuuuu?igsh=NXpwcDRwdzdsbXR1" target="_blank" rel="noopener noreferrer" class="text-white hover:text-pink-500 social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.059 1.689.073 4.948.073s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
+                    <a href="https://discord.gg/ZjVzgH7A" target="_blank" rel="noopener noreferrer" class="text-white hover:text-indigo-400 social-icon"><svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v19.056c0 1.368-1.104 2.472-2.46 2.472h-15.08c-1.356 0-2.46-1.104-2.46-2.472v-19.056c0-1.368 1.104-2.472 2.46-2.472h15.08zm-4.632 15.672c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.032-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032zm-6.264 0c2.214 0 4.02-1.806 4.02-4.032 0-2.226-1.806-4.032-4.02-4.032-2.226 0-4.032 1.806-4.032 4.032 0 2.226 1.806 4.032 4.032 4.032z"/></svg></a>
                 </div>
-                <p class="text-gray-500 text-sm mt-12">Página diseñada con cariño por la comunidad.</p>
+                <p class="text-gray-500 text-sm mt-12 animate-on-scroll" data-animation="fade-in-up">Página diseñada con cariño por la comunidad.</p>
+                <!-- TEXTO FINAL AÑADIDO -->
+                <p class="text-gray-600 text-xs mt-2 animate-on-scroll" data-animation="fade-in-up">y por la ayuda de mi amigo</p>
             </footer>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null, // The viewport
+                rootMargin: '0px',
+                threshold: 0.1 // When 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add 'animated' class when the element enters the viewport
+                        entry.target.classList.add('animated');
+                        // Stop observing the element once it has been animated
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Select all elements that should animate on scroll
+            document.querySelectorAll('section .animate-on-scroll, footer .animate-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
